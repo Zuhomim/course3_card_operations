@@ -4,4 +4,3 @@
 *.pyc
 *.log
 venv/
-pyproject.toml
