@@ -1,10 +1,10 @@
 import json
 from datetime import datetime
-from constants.constants import *
+from src.constants.constants import *
 
 
 def read_json(url_):
-    """возвращает все данные json-файла"""
+    """возвращает все данные json_dir-файла"""
     with open(url_, 'rt') as file:
         content = file.read()
         json_data = json.loads(content)
@@ -12,9 +12,9 @@ def read_json(url_):
     return json_data
 
 
-def parse_data(json_full):
+def parse_data(json_):
     """возвращает список операций, отсортированный по дате в обратной хронологии"""
-    json_full.sort(
+    json_.sort(
         key=lambda operation:
         datetime.strptime(
             operation.get("date", DEFAULT_DATE),
@@ -23,17 +23,18 @@ def parse_data(json_full):
         .timestamp() * 1000,
         reverse=True
     )
+    return json_
 
 
 def output_last_five(json_full_):
-    """возвращает последние пять операций со статусом Executed"""
+    """возвращает последние пять операций со статусом (state) Executed"""
     last_five_items = []
     count = 0
     for operation in json_full_:
         if (
-            operation is not None
-            and 'state' in operation.keys()
-            and operation['state'].lower() == 'executed'
+                operation is not None
+                and 'state' in operation.keys()
+                and operation['state'].lower() == 'executed'
         ):
             last_five_items.append(operation)
             count += 1
@@ -64,18 +65,22 @@ def result_output(operation_list):
     """
     result_output_list = []
     for operation in operation_list:
-        date_ = datetime.strptime(operation["date"], DATE_FORMAT).strftime("%d.%m.%Y")
-        description = operation["description"]
-        summa = operation["operationAmount"]["amount"]
-        currency = operation["operationAmount"]["currency"]["name"]
-        to_ = hide_card_number(operation["to"], "Счет")
-        if "from" in operation.keys():
-            from_ = hide_card_number(operation["from"], "Счет")
-            result_output_list.append(
-                f'''{date_} {description}\n{from_} -> {to_}\n{summa} {currency}'''
-            )
+        keys_ = ["date", "description", "operationAmount"]
+        if not all(key_ in operation.keys() for key_ in keys_):
+            continue
         else:
-            result_output_list.append(
-                f'''{date_} {description}\n{to_}\n{summa} {currency}'''
-            )
+            date_ = datetime.strptime(operation["date"], DATE_FORMAT).strftime("%d.%m.%Y")
+            description = operation["description"]
+            summa = operation["operationAmount"]["amount"]
+            currency = operation["operationAmount"]["currency"]["name"]
+            to_ = hide_card_number(operation["to"], "Счет")
+            if "from" in operation.keys():
+                from_ = hide_card_number(operation["from"], "Счет")
+                result_output_list.append(
+                    f'''{date_} {description}\n{from_} -> {to_}\n{summa} {currency}'''
+                )
+            else:
+                result_output_list.append(
+                    f'''{date_} {description}\n{to_}\n{summa} {currency}'''
+                )
     return result_output_list
