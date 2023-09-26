@@ -1,0 +1,76 @@
+[
+  {
+    "id": 720751477,
+    "state": "EXECUTED",
+    "date": "2018-11-08T08:21:45.902633",
+    "operationAmount": {
+      "amount": "16872.46",
+      "currency": {
+        "name": "USD",
+        "code": "USD"
+      }
+    },
+    "description": "Перевод организации",
+    "from": "Счет 75743795418434298755",
+    "to": "Счет 80785963509390811744"
+  },
+  {
+    "id": 949194534,
+    "state": "EXECUTED",
+    "date": "2019-08-15T01:48:10.042554",
+    "operationAmount": {
+      "amount": "31222.43",
+      "currency": {
+        "name": "руб.",
+        "code": "RUB"
+      }
+    },
+    "description": "Перевод организации",
+    "from": "Счет 65298957349197687907",
+    "to": "Счет 38784565940893479418"
+  },
+  {
+    "id": 893507143,
+    "state": "EXECUTED",
+    "date": "2018-02-03T07:16:28.366141",
+    "operationAmount": {
+      "amount": "90297.21",
+      "currency": {
+        "name": "руб.",
+        "code": "RUB"
+      }
+    },
+    "description": "Открытие вклада",
+    "to": "Счет 37653295304860108767"
+  },
+  {
+    "id": 710136990,
+    "state": "CANCELED",
+    "date": "2018-08-17T03:57:28.607101",
+    "operationAmount": {
+      "amount": "66906.45",
+      "currency": {
+        "name": "USD",
+        "code": "USD"
+      }
+    },
+    "description": "Перевод организации",
+    "from": "Maestro 1913883747791351",
+    "to": "Счет 11492155674319392427"
+  },
+  {},
+  {
+    "id": 881230966,
+    "state": "CANCELLED",
+    "operationAmount": {
+      "amount": "100",
+      "currency": {
+        "name": "руб.",
+        "code": "RUB"
+      },
+      "description": "Test",
+      "from": "Maestro 1913883747791351",
+      "to": "Visa 11492155674319392427"
+    }
+  }
+]
